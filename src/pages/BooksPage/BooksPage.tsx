@@ -1,19 +1,17 @@
 import './BooksPage.scss';
+import { SearchBar } from 'components/SearchBar/SearchBar';
 
 const BooksPage = () => {
   return (
     <article className="books">
       <section className="books__configuration">
         <div className="books__input-group input-group">
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Search for you favorite books"
-            aria-label="Search for you favorite books"
+          <SearchBar
+            startSearch={(data) => {
+              console.log(data);
+            }}
+            inputPlaceholder="Search for you favorite books"
           />
-          <button className="btn btn-primary" type="button">
-            Search
-          </button>
         </div>
         <div>
           <h2>123</h2>
