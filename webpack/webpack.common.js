@@ -13,6 +13,7 @@ module.exports = {
       data: path.resolve(__dirname, '..', './src/data'),
       store: path.resolve(__dirname, '..', './src/store'),
       App: path.resolve(__dirname, '..', './src/App'),
+      pages: path.resolve(__dirname, '..', './src/pages'),
     },
   },
   module: {
@@ -27,8 +28,15 @@ module.exports = {
         ],
       },
       {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        test: /\.s[ac]ss$/i,
+        use: [
+          // Creates `style` nodes from JS strings
+          'style-loader',
+          // Translates CSS into CommonJS
+          'css-loader',
+          // Compiles Sass to CSS
+          'sass-loader',
+        ],
       },
       // webpack 5 имеет собственные loaders для работы с большинством расширений картинок
       {
