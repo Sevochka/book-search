@@ -7,7 +7,7 @@ class BookStore {
 
   @action setBooks = (): void => {
     loadBooksData('js').then((data) => {
-      console.log(data);
+      this.books = data;
     });
     // this.books = this.getCountryByCode(countryCode);
   };
