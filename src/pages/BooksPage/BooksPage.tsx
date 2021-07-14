@@ -6,7 +6,6 @@ const BooksPage = () => {
   return (
     <article className="books">
       <ConfigurationPart className="books__configuration" />
-
       <section className="books__content">
         <ContentPart />
       </section>
