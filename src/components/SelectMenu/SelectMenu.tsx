@@ -26,7 +26,7 @@ const SelectMenu: FC<Props> = ({ options, label, onSelect, selectId }) => {
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     onSelect(event.target.value);
   };
-  console.log(selectedOption);
+
   return (
     <div className="input-group">
       <div className="input-group-prepend">
