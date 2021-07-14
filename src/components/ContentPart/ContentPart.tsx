@@ -11,12 +11,13 @@ const ContentPart: FC = observer(() => {
   }
   const mapBooks = bookStore.books.map(({ volumeInfo }, i) => {
     const { authors, title, categories, imageLinks } = volumeInfo;
+    const category = categories ? categories[0] : '';
     return (
       <BookCard
         key={i}
         authors={authors}
         title={title}
-        categories={categories}
+        category={category}
         smallThumbnail={imageLinks && imageLinks.smallThumbnail}
       />
     );
