@@ -2,17 +2,21 @@ import { SearchBar } from 'components/SearchBar/SearchBar';
 import { FC } from 'react';
 import { SelectMenu } from 'components/SelectMenu/SelectMenu';
 import './ConfigurationPart.scss';
+import { observer } from 'mobx-react';
+import { useStores } from 'hooks/useStores';
 
 type Props = {
   className: string;
 };
 
-const ConfigurationPart: FC<Props> = ({ className }) => {
+let ConfigurationPart: FC<Props> = ({ className }) => {
+  const { bookStore } = useStores();
   return (
     <section className={className}>
       <SearchBar
         handleStartSearch={(data) => {
-          console.log(data);
+          bookStore.searchText = data;
+          bookStore.setBooks();
         }}
         inputPlaceholder="Search for you favorite books"
       />
@@ -55,5 +59,7 @@ const ConfigurationPart: FC<Props> = ({ className }) => {
     </section>
   );
 };
+
+ConfigurationPart = observer(ConfigurationPart);
 
 export { ConfigurationPart };
