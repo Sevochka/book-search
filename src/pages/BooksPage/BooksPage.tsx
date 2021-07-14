@@ -1,5 +1,6 @@
-import './BooksPage.scss';
 import { ConfigurationPart } from 'components/ConfigarationPart/ConfigurationPart';
+import { ContentPart } from 'components/ContentPart/ContentPart';
+import './BooksPage.scss';
 
 const BooksPage = () => {
   return (
@@ -7,7 +8,7 @@ const BooksPage = () => {
       <ConfigurationPart className="books__configuration" />
 
       <section className="books__content">
-        <h1>1</h1>
+        <ContentPart />
       </section>
     </article>
   );
