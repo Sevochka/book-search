@@ -1,25 +1,24 @@
 import React, { FC, useState, ChangeEvent, KeyboardEvent } from 'react';
 
 type Props = {
-  startSearch: (searchText: string) => void;
+  handleStartSearch: (searchText: string) => void;
   inputPlaceholder: string;
 };
 
-const SearchBar: FC<Props> = ({ startSearch, inputPlaceholder }) => {
+const SearchBar: FC<Props> = ({ handleStartSearch, inputPlaceholder }) => {
   const [searchText, setSearchText] = useState('');
-  const clearSearchText = () => {
+  const handleClearSearchText = () => {
     setSearchText('');
   };
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.currentTarget.value);
   };
-  const handleStartSearch = () => {
-    startSearch(searchText);
-    clearSearchText();
+  const startSearch = () => {
+    handleStartSearch(searchText);
   };
   const handleEnterKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      handleStartSearch();
+      startSearch();
     }
   };
   return (
@@ -33,12 +32,15 @@ const SearchBar: FC<Props> = ({ startSearch, inputPlaceholder }) => {
         onChange={handleInputChange}
         onKeyPress={handleEnterKeyDown}
       />
-      <button
-        className="btn btn-primary"
-        type="button"
-        onClick={handleStartSearch}
-      >
+      <button className="btn btn-primary" type="button" onClick={startSearch}>
         Search
+      </button>
+      <button
+        className="btn btn-danger"
+        type="button"
+        onClick={handleClearSearchText}
+      >
+        Cancel
       </button>
     </>
   );
