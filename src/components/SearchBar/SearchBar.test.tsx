@@ -1,6 +1,7 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { SearchBar } from './SearchBar';
+import userEvent from '@testing-library/user-event';
 
 describe('SearchBar', () => {
   const placeholder = 'Test Placeholder',
@@ -27,23 +28,15 @@ describe('SearchBar', () => {
   test('should clear input on btn-clear click', () => {
     const btnElement = screen.getByText('Cancel');
     const inputElement = screen.getByPlaceholderText(placeholder);
-    fireEvent.change(inputElement, {
-      target: {
-        value: searchText,
-      },
-    });
-    fireEvent.click(btnElement);
+    userEvent.type(inputElement, searchText);
+    userEvent.click(btnElement);
     expect((inputElement as HTMLInputElement).value).toBe('');
   });
   test('should call executor function with searchText on btn-search click', () => {
     const btnElement = screen.getByText('Search');
     const inputElement = screen.getByPlaceholderText(placeholder);
-    fireEvent.change(inputElement, {
-      target: {
-        value: searchText,
-      },
-    });
-    fireEvent.click(btnElement);
+    userEvent.type(inputElement, searchText);
+    userEvent.click(btnElement);
     expect(executorSpy).toBeCalledWith(searchText);
   });
 });

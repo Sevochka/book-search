@@ -22,7 +22,7 @@ const SearchBar: FC<Props> = ({ handleStartSearch, inputPlaceholder }) => {
     }
   };
   return (
-    <>
+    <div className="input-group">
       <input
         type="text"
         className="form-control"
@@ -42,7 +42,7 @@ const SearchBar: FC<Props> = ({ handleStartSearch, inputPlaceholder }) => {
       >
         Cancel
       </button>
-    </>
+    </div>
   );
 };
 
