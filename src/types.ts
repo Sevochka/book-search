@@ -24,4 +24,10 @@ type BooksData = {
   totalItems: number;
 };
 
-export type { BookItem, BooksData };
+type SelectOption = {
+  value: string;
+  label?: string;
+  selected?: boolean;
+};
+
+export type { BookItem, BooksData, SelectOption };
