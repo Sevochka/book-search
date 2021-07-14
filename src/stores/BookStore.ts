@@ -9,7 +9,6 @@ class BookStore {
     loadBooksData('js').then((data) => {
       this.books = data;
     });
-    // this.books = this.getCountryByCode(countryCode);
   };
 }
 
