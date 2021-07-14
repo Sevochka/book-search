@@ -9,7 +9,7 @@ type BookItem = {
     categories?: string[];
     publisher?: string;
     publishedDate: string;
-    authors: string[];
+    authors?: string[];
     description: string;
     infoLink: string;
     imageLinks?: {
