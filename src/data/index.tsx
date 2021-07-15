@@ -35,4 +35,6 @@ const sortOptions: SelectOption[] = [
   },
 ];
 
-export { categoriesOptions, sortOptions };
+const paginationStep = 30;
+
+export { categoriesOptions, sortOptions, paginationStep };

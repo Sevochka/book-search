@@ -9,4 +9,8 @@
   &__total-items {
     text-align: center;
   }
+  &__load-more {
+    display: flex;
+    justify-content: flex-end;
+  }
 }

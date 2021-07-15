@@ -6,9 +6,13 @@ import './ContentPart.scss';
 
 const ContentPart: FC = observer(() => {
   const { bookStore } = useStores();
-  if (!bookStore.books) {
+  if (!bookStore.books.length) {
     return null;
   }
+  const handleLoadMoreClick = () => {
+    bookStore.addPagination();
+    bookStore.setBooks(false);
+  };
   const mapBooks = bookStore.books.map(({ volumeInfo }, i) => {
     const { authors, title, categories, imageLinks } = volumeInfo;
     const category = categories ? categories[0] : '';
@@ -28,6 +32,11 @@ const ContentPart: FC = observer(() => {
         Found {bookStore.totalItems} results
       </div>
       <div className="content-part__books">{mapBooks}</div>
+      <div className="content-part__load-more">
+        <button className="btn btn-link" onClick={handleLoadMoreClick}>
+          Load more
+        </button>
+      </div>
     </div>
   );
 });

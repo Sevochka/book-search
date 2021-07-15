@@ -1,14 +1,16 @@
 import { action, computed, makeAutoObservable, observable } from 'mobx';
 import { loadBooksData } from 'api/api';
 import { BookItem } from 'types';
-import { categoriesOptions, sortOptions } from 'data';
+import { categoriesOptions, paginationStep, sortOptions } from 'data';
 
 class BookStore {
-  @observable books: BookItem[] | null = null;
+  @observable books: BookItem[] = [];
   @observable totalItems: number | null = null;
   @observable private _searchText = '';
   @observable private _currentCategoryValue: string;
   @observable private _currentSortByValue: string;
+
+  @observable startSearchIndex = 0;
 
   @observable isLoading = false;
 
@@ -48,7 +50,11 @@ class BookStore {
     return this._currentSortByValue;
   }
 
-  @action setBooks = async (): Promise<void> => {
+  @action addPagination() {
+    this.startSearchIndex += paginationStep;
+  }
+
+  @action setBooks = async (withLoading = true): Promise<void> => {
     const q =
       this.currentCategoryValue !== ''
         ? `${this.searchText}+subject:${this.currentCategoryValue}`
@@ -56,11 +62,16 @@ class BookStore {
     if (q.trim() === '') {
       return;
     }
-    this.isLoading = true;
-    const data = await loadBooksData(q, this.currentSortByValue);
-    this.books = data.items;
+    if (withLoading) this.isLoading = true;
+    const data = await loadBooksData(
+      q,
+      this.currentSortByValue,
+      this.startSearchIndex
+    );
+    this.books = this.books?.concat(data.items);
     this.totalItems = data.totalItems;
-    this.isLoading = false;
+
+    if (withLoading) this.isLoading = false;
   };
 }
 
