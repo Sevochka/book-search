@@ -10,6 +10,8 @@ class BookStore {
   @observable private _currentCategoryValue: string;
   @observable private _currentSortByValue: string;
 
+  @observable isLoading = false;
+
   constructor() {
     makeAutoObservable(this);
 
@@ -51,9 +53,14 @@ class BookStore {
       this.currentCategoryValue !== ''
         ? `${this.searchText}+subject:${this.currentCategoryValue}`
         : this.searchText;
+    if (q.trim() === '') {
+      return;
+    }
+    this.isLoading = true;
     const data = await loadBooksData(q, this.currentSortByValue);
     this.books = data.items;
     this.totalItems = data.totalItems;
+    this.isLoading = false;
   };
 }
 
