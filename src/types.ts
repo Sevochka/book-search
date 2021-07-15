@@ -31,4 +31,14 @@ type SelectOption = {
   selected?: boolean;
 };
 
-export type { BookItem, BooksData, SelectOption };
+type OrderBy = 'relevance' | 'newest';
+type Category =
+  | ''
+  | 'art'
+  | 'biography'
+  | 'computers'
+  | 'history'
+  | 'medical'
+  | 'poetry';
+
+export type { BookItem, BooksData, SelectOption, OrderBy, Category };
