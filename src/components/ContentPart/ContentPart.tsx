@@ -22,7 +22,14 @@ const ContentPart: FC = observer(() => {
       />
     );
   });
-  return <div className="content-part">{mapBooks}</div>;
+  return (
+    <div className="content-part">
+      <div className="content-part__total-items">
+        Found {bookStore.totalItems} results
+      </div>
+      <div className="content-part__books">{mapBooks}</div>
+    </div>
+  );
 });
 
 export { ContentPart };
