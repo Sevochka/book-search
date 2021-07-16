@@ -1,13 +1,13 @@
 .book-card {
-  background: ghostwhite;
+  background: #fce8e8;
   height: 200px;
   overflow: hidden;
   cursor: pointer;
-  border: 2px solid transparent;
+  border: 2px solid lightgray;
   padding: 2px;
 
   &:hover {
-    border: 2px solid gray;
+    box-shadow: 0 0 0 5px gray;
   }
 
   .card-body {
