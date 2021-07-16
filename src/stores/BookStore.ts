@@ -1,10 +1,11 @@
 import { action, computed, makeAutoObservable, observable } from 'mobx';
-import { loadBooksData } from 'api/api';
+import { loadBooksData, loadCurrentBookData } from 'api/api';
 import { BookItem } from 'types';
 import { categoriesOptions, paginationStep, sortOptions } from 'data';
 
 class BookStore {
   @observable books: BookItem[] = [];
+  @observable currentBook: BookItem | null = null;
   @observable totalItems: number | null = null;
   @observable private _searchText = '';
   @observable private _currentCategoryValue: string;
@@ -54,6 +55,14 @@ class BookStore {
     this.startSearchIndex += paginationStep;
   }
 
+  @action setCurrentBook = async (id: string): Promise<void> => {
+    this.currentBook = await loadCurrentBookData(id);
+  };
+
+  @action clearCurrentBook = () => {
+    this.currentBook = null;
+  };
+
   @action setBooks = async (withLoading = true): Promise<void> => {
     const q =
       this.currentCategoryValue !== ''
@@ -68,8 +77,13 @@ class BookStore {
       this.currentSortByValue,
       this.startSearchIndex
     );
-    this.books = this.books?.concat(data.items);
-    this.totalItems = data.totalItems;
+    if (withLoading) {
+      this.books = data.items || [];
+      this.totalItems = data.totalItems;
+    } else {
+      this.books = this.books?.concat(data.items);
+      this.totalItems = data.totalItems;
+    }
 
     if (withLoading) this.isLoading = false;
   };
