@@ -31,13 +31,4 @@ const routes: Route[] = [
   },
 ];
 
-const routesMap: { [name: string]: string } = routes.reduce(
-  (prevRoutes, currentRoute) => ({
-    ...prevRoutes,
-    [`${currentRoute.name}`]: currentRoute.path,
-  }),
-  {}
-);
-
 export default routes;
-export { routesMap };
