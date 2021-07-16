@@ -1,4 +1,3 @@
-import { ConfigurationPart } from 'components/ConfigarationPart/ConfigurationPart';
 import { ContentPart } from 'components/ContentPart/ContentPart';
 import './BooksPage.scss';
 import WithLoading from '../../hocs/withLoading';
@@ -9,11 +8,16 @@ const WithLoadingCardMainStat = WithLoading(ContentPart);
 
 const BooksPage = observer(() => {
   const { bookStore } = useStores();
+  console.log(bookStore.books);
+  const isBooksEmpty = bookStore.books.length === 0;
   return (
     <article className="books">
-      <ConfigurationPart className="books__configuration" />
       <section className="books__content">
-        <WithLoadingCardMainStat isLoading={bookStore.isLoading} />
+        {isBooksEmpty ? (
+          <h1>NOTHING</h1>
+        ) : (
+          <WithLoadingCardMainStat isLoading={bookStore.isLoading} />
+        )}
       </section>
     </article>
   );
