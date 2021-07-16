@@ -45,9 +45,9 @@ const ContentPart: FC = observer(() => {
       </div>
       <div className="content-part__books">{mapBooks}</div>
       {bookStore.books.length === bookStore.totalItems || (
-        <div className="content-part__load-more">
+        <div className="content-part__load-more container">
           <button
-            className="btn btn-primary m-3"
+            className="btn btn-primary"
             type="button"
             disabled={isMoreLoading}
             onClick={handleLoadMoreClick}
