@@ -1,17 +1,40 @@
-import { FC } from 'react';
+import { FC, KeyboardEvent } from 'react';
 import './BookCard.scss';
+import { useHistory } from 'react-router';
 
 type Props = {
   title: string;
   category?: string;
   smallThumbnail?: string;
   authors?: string[];
+  id: string;
 };
 
-const BookCard: FC<Props> = ({ smallThumbnail, title, authors, category }) => {
+const BookCard: FC<Props> = ({
+  smallThumbnail,
+  title,
+  authors,
+  id,
+  category,
+}) => {
+  const history = useHistory();
   const joinAuthors = authors ? authors.join(', ') : '';
+  const handleCardClick = () => {
+    history.push(`/book/${id}/`);
+  };
+  const handleCardKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Enter') {
+      handleCardClick();
+    }
+  };
   return (
-    <div className="card mb-3 justify-content-center book-card">
+    <div
+      className="card mb-3 justify-content-center book-card"
+      onClick={handleCardClick}
+      onKeyDown={handleCardKeyDown}
+      role="link"
+      tabIndex={0}
+    >
       <div className="row g-0 align-items-center">
         <div className="col-md-4">
           {smallThumbnail && (

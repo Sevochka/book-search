@@ -1,6 +1,7 @@
 type BookItem = {
   buyLink: string;
   etag: string | undefined;
+  id: string;
   retailPrice: {
     amount: number;
     currencyCode: string;

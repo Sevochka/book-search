@@ -2,6 +2,13 @@
   background: ghostwhite;
   height: 200px;
   overflow: hidden;
+  cursor: pointer;
+  border: 2px solid transparent;
+  padding: 2px;
+
+  &:hover {
+    border: 2px solid gray;
+  }
 
   .card-body {
     display: flex;

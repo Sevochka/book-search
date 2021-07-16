@@ -13,7 +13,7 @@ const ContentPart: FC = observer(() => {
     bookStore.addPagination();
     bookStore.setBooks(false);
   };
-  const mapBooks = bookStore.books.map(({ volumeInfo }, i) => {
+  const mapBooks = bookStore.books.map(({ volumeInfo, id }, i) => {
     const { authors, title, categories, imageLinks } = volumeInfo;
     const category = categories ? categories[0] : '';
     return (
@@ -22,6 +22,7 @@ const ContentPart: FC = observer(() => {
         authors={authors}
         title={title}
         category={category}
+        id={id}
         smallThumbnail={imageLinks && imageLinks.smallThumbnail}
       />
     );
