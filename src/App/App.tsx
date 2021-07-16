@@ -17,7 +17,7 @@ const App = observer(() => {
   ));
   return (
     <div className="App">
-      <ConfigurationPart className="books__configuration" />
+      <ConfigurationPart className="configuration" />
       <Router>
         <Switch>{routesComponents}</Switch>
       </Router>

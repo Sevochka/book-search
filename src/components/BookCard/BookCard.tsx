@@ -36,11 +36,11 @@ const BookCard: FC<Props> = ({
       tabIndex={0}
     >
       <div className="row g-0 align-items-center">
-        <div className="col-md-4">
+        <div className="col-md-4 text-center">
           {smallThumbnail && (
             <img
               src={smallThumbnail}
-              className="img-fluid rounded-start w-100"
+              className="img-fluid rounded-start"
               alt={title}
             />
           )}

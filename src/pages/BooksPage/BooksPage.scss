@@ -1,16 +1,5 @@
 .books {
   position: relative;
-  &__configuration {
-    background: url('../../assets/booksBackground.jpg');
-    background-size: cover;
-    height: 40vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 0 25%;
-    gap: 10px;
-  }
   &__content {
     margin-top: 20px;
   }

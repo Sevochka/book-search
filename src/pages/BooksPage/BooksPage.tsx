@@ -8,13 +8,19 @@ const WithLoadingCardMainStat = WithLoading(ContentPart);
 
 const BooksPage = observer(() => {
   const { bookStore } = useStores();
-  console.log(bookStore.books);
   const isBooksEmpty = bookStore.books.length === 0;
+
   return (
     <article className="books">
       <section className="books__content">
-        {isBooksEmpty ? (
-          <h1>NOTHING</h1>
+        {isBooksEmpty && !bookStore.isLoading ? (
+          <div className="alert text-center">
+            <h3>
+              {bookStore.searchText.trim() !== ''
+                ? 'Looks like nothing has been found. Try to change your search text.'
+                : 'Start searching by typing books title in the field.'}
+            </h3>
+          </div>
         ) : (
           <WithLoadingCardMainStat isLoading={bookStore.isLoading} />
         )}
