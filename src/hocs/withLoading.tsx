@@ -1,11 +1,11 @@
 import React from 'react';
-
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 type HocProps = {
   isLoading: boolean;
-  [propName: string]: unknown;
+  [propName: string]: any;
 };
 
-const WithLoading = (Component: React.FC<unknown>) =>
+const WithLoading = (Component: React.FC<any>) =>
   function WihLoadingComponent({ isLoading, ...props }: HocProps): JSX.Element {
     return !isLoading ? (
       <Component {...props} />
