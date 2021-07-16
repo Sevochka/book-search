@@ -8,12 +8,17 @@ import { BookItem } from 'types';
  * So in order to compare results we need to remove it.
  * */
 
-const removeEtag = (books: BookItem[]) => {
+const removeEtagFromBooks = (books: BookItem[]) => {
   return books.map((book) => {
-    delete book.etag;
-    return book;
+    return removeEtag(book);
   });
 };
+
+const removeEtag = (book: BookItem) => {
+  delete book.etag;
+  return book;
+};
+
 describe('BookStore', () => {
   let store: BookStore;
   const searchTestText = 'Hello, World';
@@ -24,13 +29,32 @@ describe('BookStore', () => {
     store.searchText = searchTestText;
     expect(store.searchText).toEqual(searchTestText);
   });
+  test('should set currentBook', async () => {
+    const id = 'MqRXAwAAQBAJ';
+    await store.setCurrentBook(id);
+
+    expect(store.currentBook).not.toBeNull();
+  });
+
+  test('should clear currentBook', () => {
+    const id = 'MqRXAwAAQBAJ';
+    store.setCurrentBook(id);
+    store.clearCurrentBook();
+
+    expect(store.currentBook).toBeNull();
+  });
+
   test('expect books from store to be equal to api req data', async () => {
     store.searchText = searchTestText;
     await store.setBooks();
-    const booksData = await loadBooksData(searchTestText);
+    const booksData = await loadBooksData(
+      searchTestText,
+      store.currentSortByValue,
+      store.startSearchIndex
+    );
 
-    expect(removeEtag(store.books as BookItem[])).toEqual(
-      removeEtag(booksData.items)
+    expect(removeEtagFromBooks(store.books as BookItem[])).toEqual(
+      removeEtagFromBooks(booksData.items)
     );
   });
 });
