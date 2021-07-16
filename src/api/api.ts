@@ -2,6 +2,7 @@ import axios, { AxiosResponse } from 'axios';
 import { BookItem, BooksData } from 'types';
 
 axios.defaults.baseURL = `https://www.googleapis.com/books/v1/volumes`;
+const key = 'AIzaSyAD4odPQAWao6Hmf4Kdq7cnSoAFN3YL4jE';
 
 const loadBooksData = async (
   q: string,
@@ -11,7 +12,7 @@ const loadBooksData = async (
   const response: AxiosResponse<BooksData> = await axios.get('', {
     params: {
       q,
-      key: 'AIzaSyAD4odPQAWao6Hmf4Kdq7cnSoAFN3YL4jE',
+      key,
       maxResults: 30,
       orderBy,
       startIndex,
@@ -21,7 +22,9 @@ const loadBooksData = async (
 };
 
 const loadCurrentBookData = async (id: string) => {
-  const response: AxiosResponse<BookItem> = await axios.get(id);
+  const response: AxiosResponse<BookItem> = await axios.get(id, {
+    params: { key },
+  });
   return response.data;
 };
 
