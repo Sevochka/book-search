@@ -4,6 +4,7 @@ import { observer } from 'mobx-react';
 import { useStores } from 'hooks/useStores';
 import { useEffect } from 'react';
 import routes from 'routes';
+import { ConfigurationPart } from 'components/ConfigarationPart/ConfigurationPart';
 
 const App = observer(() => {
   const { bookStore } = useStores();
@@ -16,6 +17,7 @@ const App = observer(() => {
   ));
   return (
     <div className="App">
+      <ConfigurationPart className="books__configuration" />
       <Router>
         <Switch>{routesComponents}</Switch>
       </Router>
