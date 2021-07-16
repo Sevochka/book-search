@@ -12,12 +12,23 @@ describe('BookCard', () => {
     authors: ['Test Author 1', 'Test Author 2'],
     id: 'test id',
   };
+  const emptyCardProps = {
+    title: undefined,
+    category: undefined,
+    smallThumbnail: undefined,
+    authors: undefined,
+    id: 'test id',
+  };
+  let rerender: (
+    ui: React.ReactElement<any, string | React.JSXElementConstructor<any>>
+  ) => void;
+
   let executorSpy: jest.Mock;
 
   beforeEach(() => {
     executorSpy = jest.fn((id: string) => id);
     const { title, authors, id, category, smallThumbnail } = cardProps;
-    render(
+    rerender = render(
       <BookCard
         id={id}
         title={title}
@@ -26,7 +37,7 @@ describe('BookCard', () => {
         authors={authors}
         onCardClick={executorSpy}
       />
-    );
+    ).rerender;
   });
 
   test('expect given data to be in the document', () => {
@@ -43,8 +54,23 @@ describe('BookCard', () => {
   test('displays right image', () => {
     const { smallThumbnail } = cardProps;
     const displayedImage = document.querySelector('img') as HTMLImageElement;
-    console.log(displayedImage.src);
     expect(displayedImage.src).toContain(smallThumbnail);
+  });
+
+  test('render without data', () => {
+    const { title, authors, id, category, smallThumbnail } = emptyCardProps;
+    rerender(
+      <BookCard
+        id={id}
+        title={title}
+        category={category}
+        smallThumbnail={smallThumbnail}
+        authors={authors}
+        onCardClick={executorSpy}
+      />
+    );
+    const card = document.querySelector('.book-card') as HTMLDivElement;
+    expect(card).toBeInTheDocument();
   });
 
   test('should call executor function with id on card click', () => {

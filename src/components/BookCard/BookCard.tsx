@@ -2,7 +2,7 @@ import { FC, KeyboardEvent } from 'react';
 import './BookCard.scss';
 
 type Props = {
-  title: string;
+  title?: string;
   category?: string;
   smallThumbnail?: string;
   authors?: string[];
