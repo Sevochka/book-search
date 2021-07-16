@@ -16,6 +16,7 @@ module.exports = {
       contexts: path.resolve(__dirname, './src/contexts'),
       pages: path.resolve(__dirname, './src/pages'),
       routes: path.resolve(__dirname, './src/routes'),
+      hocs: path.resolve(__dirname, './src/hocs'),
     },
   },
   module: {
