@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import { BooksData } from 'types';
+import { BookItem, BooksData } from 'types';
 
 axios.defaults.baseURL = `https://www.googleapis.com/books/v1/volumes`;
 
@@ -20,4 +20,9 @@ const loadBooksData = async (
   return response.data;
 };
 
-export { loadBooksData };
+const loadCurrentBookData = async (id: string) => {
+  const response: AxiosResponse<BookItem> = await axios.get(id);
+  return response.data;
+};
+
+export { loadBooksData, loadCurrentBookData };
