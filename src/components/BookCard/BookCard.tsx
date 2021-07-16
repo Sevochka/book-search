@@ -1,6 +1,5 @@
 import { FC, KeyboardEvent } from 'react';
 import './BookCard.scss';
-import { useHistory } from 'react-router';
 
 type Props = {
   title: string;
@@ -8,6 +7,7 @@ type Props = {
   smallThumbnail?: string;
   authors?: string[];
   id: string;
+  onCardClick: (id: string) => void;
 };
 
 const BookCard: FC<Props> = ({
@@ -16,11 +16,11 @@ const BookCard: FC<Props> = ({
   authors,
   id,
   category,
+  onCardClick,
 }) => {
-  const history = useHistory();
   const joinAuthors = authors ? authors.join(', ') : '';
   const handleCardClick = () => {
-    history.push(`/book/${id}/`);
+    onCardClick(id);
   };
   const handleCardKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
     if (e.key === 'Enter') {

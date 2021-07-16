@@ -3,15 +3,20 @@ import { BookCard } from 'components/BookCard/BookCard';
 import { observer } from 'mobx-react';
 import { useStores } from 'hooks/useStores';
 import './ContentPart.scss';
+import { useHistory } from 'react-router';
 
 const ContentPart: FC = observer(() => {
   const { bookStore } = useStores();
+  const history = useHistory();
   if (!bookStore.books.length) {
     return null;
   }
   const handleLoadMoreClick = () => {
     bookStore.addPagination();
     bookStore.setBooks(false);
+  };
+  const onCardClick = (id: string) => {
+    history.push(`/book/${id}/`);
   };
   const mapBooks = bookStore.books.map(({ volumeInfo, id }, i) => {
     const { authors, title, categories, imageLinks } = volumeInfo;
@@ -24,6 +29,7 @@ const ContentPart: FC = observer(() => {
         category={category}
         id={id}
         smallThumbnail={imageLinks && imageLinks.smallThumbnail}
+        onCardClick={onCardClick}
       />
     );
   });
