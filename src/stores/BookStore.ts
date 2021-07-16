@@ -54,6 +54,9 @@ class BookStore {
   @action addPagination() {
     this.startSearchIndex += paginationStep;
   }
+  @action clearPagination() {
+    this.startSearchIndex = 0;
+  }
 
   @action setCurrentBook = async (id: string): Promise<void> => {
     this.currentBook = await loadCurrentBookData(id);
@@ -69,9 +72,13 @@ class BookStore {
         ? `${this.searchText}+subject:${this.currentCategoryValue}`
         : this.searchText;
     if (q.trim() === '') {
+      this.books = [];
       return;
     }
-    if (withLoading) this.isLoading = true;
+    if (withLoading) {
+      this.clearPagination();
+      this.isLoading = true;
+    }
     const data = await loadBooksData(
       q,
       this.currentSortByValue,
