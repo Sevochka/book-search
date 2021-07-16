@@ -5,9 +5,9 @@ type Props = {
   thumbnail?: string;
   categories?: string[];
   authors?: string[];
-  title: string;
-  description: string;
-  buyLink: string;
+  title?: string;
+  description?: string;
+  buyLink?: string;
 };
 
 const BookInfo: FC<Props> = ({
