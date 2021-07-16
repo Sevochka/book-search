@@ -3,17 +3,12 @@ import './BookCard.scss';
 
 type Props = {
   title: string;
-  categories?: string[];
+  category?: string;
   smallThumbnail?: string;
   authors?: string[];
 };
 
-const BookCard: FC<Props> = ({
-  smallThumbnail,
-  title,
-  authors,
-  categories,
-}) => {
+const BookCard: FC<Props> = ({ smallThumbnail, title, authors, category }) => {
   const joinAuthors = authors ? authors.join(', ') : '';
   return (
     <div className="card mb-3 justify-content-center book-card">
@@ -32,9 +27,7 @@ const BookCard: FC<Props> = ({
             <h5 className="card-title fs-6">{title}</h5>
             <p className="card-text">{joinAuthors}</p>
             <p className="card-text">
-              <small className="text-muted">
-                {categories ? categories[0] : ''}
-              </small>
+              <small className="text-muted">{category}</small>
             </p>
           </div>
         </div>

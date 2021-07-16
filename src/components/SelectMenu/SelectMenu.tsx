@@ -5,7 +5,7 @@ import './SelectMenu.scss';
 type Props = {
   options: SelectOption[];
   label: string;
-  onSelect: (option: string) => void;
+  onSelect: (value: string) => void;
   selectId: string;
 };
 

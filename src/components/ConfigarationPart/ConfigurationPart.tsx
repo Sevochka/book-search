@@ -4,6 +4,7 @@ import { SelectMenu } from 'components/SelectMenu/SelectMenu';
 import './ConfigurationPart.scss';
 import { observer } from 'mobx-react';
 import { useStores } from 'hooks/useStores';
+import { categoriesOptions, sortOptions } from 'data';
 
 type Props = {
   className: string;
@@ -11,48 +12,42 @@ type Props = {
 
 let ConfigurationPart: FC<Props> = ({ className }) => {
   const { bookStore } = useStores();
+  const setBooksInStore = async () => {
+    await bookStore.setBooks();
+  };
+
+  const handleStartSearch = (searchText: string) => {
+    bookStore.searchText = searchText;
+    setBooksInStore();
+  };
+
+  const handleSelectCategory = (value: string) => {
+    bookStore.currentCategoryValue = value;
+    setBooksInStore();
+  };
+
+  const handleSelectSortBy = (value: string) => {
+    bookStore.currentSortByValue = value;
+    setBooksInStore();
+  };
+
   return (
     <section className={className}>
       <SearchBar
-        handleStartSearch={(data) => {
-          bookStore.searchText = data;
-          bookStore.setBooks();
-        }}
+        handleStartSearch={handleStartSearch}
         inputPlaceholder="Search for you favorite books"
       />
       <div className="options">
         <SelectMenu
-          options={[
-            {
-              value: '1',
-            },
-            {
-              value: '2',
-              selected: true,
-            },
-            {
-              value: '3',
-            },
-          ]}
-          label="Select"
-          onSelect={() => console.log}
+          options={categoriesOptions}
+          label="Categories"
+          onSelect={handleSelectCategory}
           selectId="select1"
         />
         <SelectMenu
-          options={[
-            {
-              value: '1',
-            },
-            {
-              value: '2',
-              selected: true,
-            },
-            {
-              value: '3',
-            },
-          ]}
-          label="Select"
-          onSelect={() => console.log}
+          options={sortOptions}
+          label="Sorting by"
+          onSelect={handleSelectSortBy}
           selectId="select2"
         />
       </div>
